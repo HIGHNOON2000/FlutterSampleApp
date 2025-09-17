@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample_app/next_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,14 +52,29 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              ListTile(leading: Icon(Icons.key), title: Text(titleList[index])),
+              ListTile(
+                leading: Icon(Icons.key),
+                title: Text(titleList[index]),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NextPage(titleList[index]),
+                    ),
+                  );
+                },
+              ),
               Divider(height: 0),
             ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          setState(() {
+            titleList.add('Twitter');
+          });
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
